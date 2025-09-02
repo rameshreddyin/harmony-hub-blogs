@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -217,6 +218,7 @@ const getCategoryColor = (category: string) => {
 const Blogs = () => {
   const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>(initialBlogPosts);
   const [showingMore, setShowingMore] = useState(false);
+  const navigate = useNavigate();
 
   const handleLoadMore = () => {
     if (!showingMore) {
@@ -282,7 +284,11 @@ const Blogs = () => {
                 
                 <div className="flex flex-col items-end gap-2">
                   <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                  <Button variant="read-more" size="sm">
+                  <Button 
+                    variant="read-more" 
+                    size="sm"
+                    onClick={() => navigate(`/blog/${post.id}`)}
+                  >
                     Read More
                   </Button>
                 </div>
